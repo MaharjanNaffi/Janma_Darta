@@ -41,12 +41,6 @@ const birthFormSchema = z.object({
   fatherOccupation: z.string().min(2, "Occupation is required"),
   fatherContactNumber: z.string().min(5, "Contact number is required"),
   
-  // Mother's Information
-  motherFullName: z.string().min(3, "Name must be at least 3 characters"),
-  motherNationalId: z.string().min(5, "National ID must be at least 5 characters"),
-  motherOccupation: z.string().min(2, "Occupation is required"),
-  motherContactNumber: z.string().min(5, "Contact number is required"),
-  
   // Address Details
   permanentAddress: z.string().min(5, "Address is required"),
   currentAddress: z.string().optional(),
@@ -252,61 +246,6 @@ const Index = () => {
                 />
                 {form.formState.errors.fatherContactNumber && (
                   <p className="text-sm text-red-500">{form.formState.errors.fatherContactNumber.message}</p>
-                )}
-              </FormField>
-            </div>
-          </FormSection>
-          
-          {/* Mother's Information Section */}
-          <FormSection title="Mother's Information">
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Full Name" htmlFor="motherFullName" required>
-                <Input 
-                  id="motherFullName" 
-                  placeholder="Enter full name" 
-                  {...form.register("motherFullName")} 
-                  className="w-full"
-                />
-                {form.formState.errors.motherFullName && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherFullName.message}</p>
-                )}
-              </FormField>
-              
-              <FormField label="National ID Number" htmlFor="motherNationalId" required>
-                <Input 
-                  id="motherNationalId" 
-                  placeholder="Enter national ID number" 
-                  {...form.register("motherNationalId")} 
-                  className="w-full"
-                />
-                {form.formState.errors.motherNationalId && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherNationalId.message}</p>
-                )}
-              </FormField>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Occupation" htmlFor="motherOccupation" required>
-                <Input 
-                  id="motherOccupation" 
-                  placeholder="Enter occupation" 
-                  {...form.register("motherOccupation")} 
-                  className="w-full"
-                />
-                {form.formState.errors.motherOccupation && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherOccupation.message}</p>
-                )}
-              </FormField>
-              
-              <FormField label="Contact Number" htmlFor="motherContactNumber" required>
-                <Input 
-                  id="motherContactNumber" 
-                  placeholder="Enter contact number" 
-                  {...form.register("motherContactNumber")} 
-                  className="w-full"
-                />
-                {form.formState.errors.motherContactNumber && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherContactNumber.message}</p>
                 )}
               </FormField>
             </div>

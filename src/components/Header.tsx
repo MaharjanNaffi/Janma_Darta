@@ -10,9 +10,9 @@ const Header = ({ className }: HeaderProps) => {
     <header className={cn("flex flex-col items-center gap-2 py-6", className)}>
       <div className="flex items-center gap-4">
         <img
-          src="/nepal-government-logo.svg"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg"
           alt="Nepal Flag"
-          className="h-12 w-auto"
+          className="h-12 w-auto border rounded shadow"
         />
         <div className="text-center">
           <h1 className="text-xl md:text-2xl font-bold text-[#0F2B5B]">Government of Nepal</h1>
