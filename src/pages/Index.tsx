@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -39,8 +40,13 @@ const birthFormSchema = z.object({
   fatherFullName: z.string().min(3, "Name must be at least 3 characters"),
   fatherNationalId: z.string().min(5, "National ID must be at least 5 characters"),
   fatherOccupation: z.string().min(2, "Occupation is required"),
-  fatherContactNumber: z.string().min(5, "Contact number is required"),
+  // contact number removed
   
+  // Mother's Information
+  motherFullName: z.string().min(3, "Name must be at least 3 characters"),
+  motherNationalId: z.string().min(5, "National ID must be at least 5 characters"),
+  motherOccupation: z.string().min(2, "Occupation is required"),
+
   // Address Details
   permanentAddress: z.string().min(5, "Address is required"),
   currentAddress: z.string().optional(),
@@ -66,16 +72,14 @@ const Index = () => {
 
   const onSubmit = async (data: BirthFormValues) => {
     setIsSubmitting(true);
-    
-    // Simulate form submission
     console.log(data);
-    
-    // Simulate API call with 1.5 second delay
     setTimeout(() => {
       setIsSubmitting(false);
       toast({
         title: "Registration Submitted",
-        description: "Your birth certificate registration has been submitted successfully. Your reference number is BC-" + Math.floor(100000 + Math.random() * 900000),
+        description:
+          "Your birth certificate registration has been submitted successfully. Your reference number is BC-" +
+          Math.floor(100000 + Math.random() * 900000),
       });
       form.reset();
     }, 1500);
@@ -127,7 +131,7 @@ const Index = () => {
                         }
                       }}
                       initialFocus
-                      disabled={(date) =>
+                      disabled={date =>
                         date > new Date() || date < new Date("1900-01-01")
                       }
                     />
@@ -236,21 +240,52 @@ const Index = () => {
                   <p className="text-sm text-red-500">{form.formState.errors.fatherOccupation.message}</p>
                 )}
               </FormField>
-              
-              <FormField label="Contact Number" htmlFor="fatherContactNumber" required>
+            </div>
+          </FormSection>
+          
+          {/* Mother's Information Section */}
+          <FormSection title="Mother's Information">
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormField label="Full Name" htmlFor="motherFullName" required>
                 <Input 
-                  id="fatherContactNumber" 
-                  placeholder="Enter contact number" 
-                  {...form.register("fatherContactNumber")} 
+                  id="motherFullName" 
+                  placeholder="Enter full name" 
+                  {...form.register("motherFullName")} 
                   className="w-full"
                 />
-                {form.formState.errors.fatherContactNumber && (
-                  <p className="text-sm text-red-500">{form.formState.errors.fatherContactNumber.message}</p>
+                {form.formState.errors.motherFullName && (
+                  <p className="text-sm text-red-500">{form.formState.errors.motherFullName.message}</p>
+                )}
+              </FormField>
+              
+              <FormField label="National ID Number" htmlFor="motherNationalId" required>
+                <Input 
+                  id="motherNationalId" 
+                  placeholder="Enter national ID number" 
+                  {...form.register("motherNationalId")} 
+                  className="w-full"
+                />
+                {form.formState.errors.motherNationalId && (
+                  <p className="text-sm text-red-500">{form.formState.errors.motherNationalId.message}</p>
+                )}
+              </FormField>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormField label="Occupation" htmlFor="motherOccupation" required>
+                <Input 
+                  id="motherOccupation" 
+                  placeholder="Enter occupation" 
+                  {...form.register("motherOccupation")} 
+                  className="w-full"
+                />
+                {form.formState.errors.motherOccupation && (
+                  <p className="text-sm text-red-500">{form.formState.errors.motherOccupation.message}</p>
                 )}
               </FormField>
             </div>
           </FormSection>
-          
+
           {/* Address Details Section */}
           <FormSection title="Address Details">
             <FormField label="Permanent Address" htmlFor="permanentAddress" required>
@@ -311,3 +346,4 @@ const Index = () => {
 };
 
 export default Index;
+
