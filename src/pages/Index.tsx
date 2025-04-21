@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -89,9 +88,8 @@ const Index = () => {
     <div className="min-h-screen bg-[#F8F9FA] pb-16">
       <div className="container max-w-4xl mx-auto px-4 py-6">
         <Header />
-        
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-6">
-          {/* Child Information Section */}
+
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-2">
           <FormSection title="Child Information">
             <div className="grid md:grid-cols-2 gap-6">
               <FormField label="Full Name" htmlFor="childFullName" required>
@@ -200,7 +198,6 @@ const Index = () => {
             </div>
           </FormSection>
           
-          {/* Father's Information Section */}
           <FormSection title="Father's Information">
             <div className="grid md:grid-cols-2 gap-6">
               <FormField label="Full Name" htmlFor="fatherFullName" required>
@@ -243,7 +240,6 @@ const Index = () => {
             </div>
           </FormSection>
           
-          {/* Mother's Information Section */}
           <FormSection title="Mother's Information">
             <div className="grid md:grid-cols-2 gap-6">
               <FormField label="Full Name" htmlFor="motherFullName" required>
@@ -286,7 +282,6 @@ const Index = () => {
             </div>
           </FormSection>
 
-          {/* Address Details Section */}
           <FormSection title="Address Details">
             <FormField label="Permanent Address" htmlFor="permanentAddress" required>
               <Textarea 
@@ -310,7 +305,6 @@ const Index = () => {
             </FormField>
           </FormSection>
           
-          {/* Declaration Section */}
           <FormSection title="Declaration and Submit" className="bg-white">
             <div className="flex items-start space-x-3 mb-6">
               <Checkbox 
@@ -335,7 +329,7 @@ const Index = () => {
             </div>
           </FormSection>
         </form>
-        
+
         <footer className="mt-10 text-center text-gray-500 text-sm">
           <p>© {new Date().getFullYear()} Government of Nepal. Department of National ID and Civil Registration.</p>
           <p className="mt-1">For support, call: +977 1234 5678 | Email: support@civilregistration.gov.np</p>
@@ -346,4 +340,3 @@ const Index = () => {
 };
 
 export default Index;
-
