@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -199,15 +198,6 @@ const Index = () => {
                 {form.formState.errors.childPlaceOfBirth && (
                   <p className="text-sm text-red-500">{form.formState.errors.childPlaceOfBirth.message}</p>
                 )}
-              </FormField>
-              
-              <FormField label="Birth Certificate Number (if available)" htmlFor="childBirthCertificateNumber">
-                <Input 
-                  id="childBirthCertificateNumber" 
-                  placeholder="Certificate number" 
-                  {...form.register("childBirthCertificateNumber")} 
-                  className="w-full"
-                />
               </FormField>
             </div>
           </FormSection>
