@@ -9,15 +9,7 @@ const Header = ({ className }: HeaderProps) => {
   return (
     <header className={cn("flex flex-col items-center gap-2 py-6", className)}>
       <div className="flex items-center gap-4">
-        <img 
-          src="/nepal-government-logo.svg" 
-          alt="Nepal Government Logo"
-          className="h-16 w-auto"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "https://upload.wikimedia.org/wikipedia/commons/7/7b/Coat_of_arms_of_Nepal.svg";
-          }}
-        />
+        {/* Logo removed as requested */}
         <div className="text-center">
           <h1 className="text-xl md:text-2xl font-bold text-[#0F2B5B]">Government of Nepal</h1>
           <h2 className="text-md md:text-lg text-[#192A51]">Ministry of Home Affairs</h2>
@@ -33,3 +25,4 @@ const Header = ({ className }: HeaderProps) => {
 };
 
 export default Header;
+
