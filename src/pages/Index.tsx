@@ -85,253 +85,255 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-[#F8F9FA] to-white pb-16">
       <div className="container max-w-4xl mx-auto px-4 py-6">
         <Header />
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-12">
-          <FormSection title="Child Information">
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Full Name" htmlFor="childFullName" required>
-                <Input 
-                  id="childFullName" 
-                  placeholder="Enter full name" 
-                  {...form.register("childFullName")} 
-                  className="w-full"
-                />
-                {form.formState.errors.childFullName && (
-                  <p className="text-sm text-red-500">{form.formState.errors.childFullName.message}</p>
-                )}
-              </FormField>
-              
-              <FormField label="Date of Birth" htmlFor="childDateOfBirth" required>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !date && "text-muted-foreground"
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={(selectedDate) => {
-                        setDate(selectedDate);
-                        if (selectedDate) {
-                          form.setValue("childDateOfBirth", selectedDate);
+          <div className="bg-white rounded-xl shadow-lg border border-[#E5E7EB] p-8 space-y-12">
+            <FormSection title="Child Information">
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Full Name" htmlFor="childFullName" required>
+                  <Input 
+                    id="childFullName" 
+                    placeholder="Enter full name" 
+                    {...form.register("childFullName")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.childFullName && (
+                    <p className="text-sm text-red-500">{form.formState.errors.childFullName.message}</p>
+                  )}
+                </FormField>
+                
+                <FormField label="Date of Birth" htmlFor="childDateOfBirth" required>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !date && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={(selectedDate) => {
+                          setDate(selectedDate);
+                          if (selectedDate) {
+                            form.setValue("childDateOfBirth", selectedDate);
+                          }
+                        }}
+                        initialFocus
+                        disabled={date =>
+                          date > new Date() || date < new Date("1900-01-01")
                         }
-                      }}
-                      initialFocus
-                      disabled={date =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                    />
-                  </PopoverContent>
-                </Popover>
-                {form.formState.errors.childDateOfBirth && (
-                  <p className="text-sm text-red-500">{form.formState.errors.childDateOfBirth.message}</p>
-                )}
-              </FormField>
-            </div>
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  {form.formState.errors.childDateOfBirth && (
+                    <p className="text-sm text-red-500">{form.formState.errors.childDateOfBirth.message}</p>
+                  )}
+                </FormField>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Gender" htmlFor="childGender" required>
-                <RadioGroup 
-                  onValueChange={(value) => form.setValue("childGender", value as "male" | "female" | "other")}
-                  defaultValue={form.getValues("childGender")}
-                  className="flex space-x-4"
-                >
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="male" id="gender-male" />
-                    <label htmlFor="gender-male" className="text-sm font-medium">Male</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="female" id="gender-female" />
-                    <label htmlFor="gender-female" className="text-sm font-medium">Female</label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="other" id="gender-other" />
-                    <label htmlFor="gender-other" className="text-sm font-medium">Other</label>
-                  </div>
-                </RadioGroup>
-                {form.formState.errors.childGender && (
-                  <p className="text-sm text-red-500">{form.formState.errors.childGender.message}</p>
-                )}
-              </FormField>
-              
-              <FormField label="Place of Birth" htmlFor="childBirthPlace" required>
-                <Select onValueChange={(value) => form.setValue("childBirthPlace", value as "hospital" | "home" | "other")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select place of birth" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="hospital">Hospital</SelectItem>
-                    <SelectItem value="home">Home</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                {form.formState.errors.childBirthPlace && (
-                  <p className="text-sm text-red-500">{form.formState.errors.childBirthPlace.message}</p>
-                )}
-              </FormField>
-            </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Gender" htmlFor="childGender" required>
+                  <RadioGroup 
+                    onValueChange={(value) => form.setValue("childGender", value as "male" | "female" | "other")}
+                    defaultValue={form.getValues("childGender")}
+                    className="flex space-x-4"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="male" id="gender-male" />
+                      <label htmlFor="gender-male" className="text-sm font-medium">Male</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="female" id="gender-female" />
+                      <label htmlFor="gender-female" className="text-sm font-medium">Female</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="other" id="gender-other" />
+                      <label htmlFor="gender-other" className="text-sm font-medium">Other</label>
+                    </div>
+                  </RadioGroup>
+                  {form.formState.errors.childGender && (
+                    <p className="text-sm text-red-500">{form.formState.errors.childGender.message}</p>
+                  )}
+                </FormField>
+                
+                <FormField label="Place of Birth" htmlFor="childBirthPlace" required>
+                  <Select onValueChange={(value) => form.setValue("childBirthPlace", value as "hospital" | "home" | "other")}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select place of birth" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="hospital">Hospital</SelectItem>
+                      <SelectItem value="home">Home</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {form.formState.errors.childBirthPlace && (
+                    <p className="text-sm text-red-500">{form.formState.errors.childBirthPlace.message}</p>
+                  )}
+                </FormField>
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Birth Location" htmlFor="childPlaceOfBirth" required>
-                <Input 
-                  id="childPlaceOfBirth" 
-                  placeholder="Hospital name or address" 
-                  {...form.register("childPlaceOfBirth")} 
-                  className="w-full"
-                />
-                {form.formState.errors.childPlaceOfBirth && (
-                  <p className="text-sm text-red-500">{form.formState.errors.childPlaceOfBirth.message}</p>
-                )}
-              </FormField>
-            </div>
-          </FormSection>
-          
-          <FormSection title="Father's Information">
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Full Name" htmlFor="fatherFullName" required>
-                <Input 
-                  id="fatherFullName" 
-                  placeholder="Enter full name" 
-                  {...form.register("fatherFullName")} 
-                  className="w-full"
-                />
-                {form.formState.errors.fatherFullName && (
-                  <p className="text-sm text-red-500">{form.formState.errors.fatherFullName.message}</p>
-                )}
-              </FormField>
-              
-              <FormField label="National ID Number" htmlFor="fatherNationalId" required>
-                <Input 
-                  id="fatherNationalId" 
-                  placeholder="Enter national ID number" 
-                  {...form.register("fatherNationalId")} 
-                  className="w-full"
-                />
-                {form.formState.errors.fatherNationalId && (
-                  <p className="text-sm text-red-500">{form.formState.errors.fatherNationalId.message}</p>
-                )}
-              </FormField>
-            </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Birth Location" htmlFor="childPlaceOfBirth" required>
+                  <Input 
+                    id="childPlaceOfBirth" 
+                    placeholder="Hospital name or address" 
+                    {...form.register("childPlaceOfBirth")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.childPlaceOfBirth && (
+                    <p className="text-sm text-red-500">{form.formState.errors.childPlaceOfBirth.message}</p>
+                  )}
+                </FormField>
+              </div>
+            </FormSection>
             
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Occupation" htmlFor="fatherOccupation" required>
-                <Input 
-                  id="fatherOccupation" 
-                  placeholder="Enter occupation" 
-                  {...form.register("fatherOccupation")} 
+            <FormSection title="Father's Information">
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Full Name" htmlFor="fatherFullName" required>
+                  <Input 
+                    id="fatherFullName" 
+                    placeholder="Enter full name" 
+                    {...form.register("fatherFullName")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.fatherFullName && (
+                    <p className="text-sm text-red-500">{form.formState.errors.fatherFullName.message}</p>
+                  )}
+                </FormField>
+                
+                <FormField label="National ID Number" htmlFor="fatherNationalId" required>
+                  <Input 
+                    id="fatherNationalId" 
+                    placeholder="Enter national ID number" 
+                    {...form.register("fatherNationalId")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.fatherNationalId && (
+                    <p className="text-sm text-red-500">{form.formState.errors.fatherNationalId.message}</p>
+                  )}
+                </FormField>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Occupation" htmlFor="fatherOccupation" required>
+                  <Input 
+                    id="fatherOccupation" 
+                    placeholder="Enter occupation" 
+                    {...form.register("fatherOccupation")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.fatherOccupation && (
+                    <p className="text-sm text-red-500">{form.formState.errors.fatherOccupation.message}</p>
+                  )}
+                </FormField>
+              </div>
+            </FormSection>
+            
+            <FormSection title="Mother's Information">
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Full Name" htmlFor="motherFullName" required>
+                  <Input 
+                    id="motherFullName" 
+                    placeholder="Enter full name" 
+                    {...form.register("motherFullName")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.motherFullName && (
+                    <p className="text-sm text-red-500">{form.formState.errors.motherFullName.message}</p>
+                  )}
+                </FormField>
+                
+                <FormField label="National ID Number" htmlFor="motherNationalId" required>
+                  <Input 
+                    id="motherNationalId" 
+                    placeholder="Enter national ID number" 
+                    {...form.register("motherNationalId")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.motherNationalId && (
+                    <p className="text-sm text-red-500">{form.formState.errors.motherNationalId.message}</p>
+                  )}
+                </FormField>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <FormField label="Occupation" htmlFor="motherOccupation" required>
+                  <Input 
+                    id="motherOccupation" 
+                    placeholder="Enter occupation" 
+                    {...form.register("motherOccupation")} 
+                    className="w-full"
+                  />
+                  {form.formState.errors.motherOccupation && (
+                    <p className="text-sm text-red-500">{form.formState.errors.motherOccupation.message}</p>
+                  )}
+                </FormField>
+              </div>
+            </FormSection>
+
+            <FormSection title="Address Details">
+              <FormField label="Permanent Address" htmlFor="permanentAddress" required>
+                <Textarea 
+                  id="permanentAddress" 
+                  placeholder="Enter permanent address" 
+                  {...form.register("permanentAddress")} 
                   className="w-full"
                 />
-                {form.formState.errors.fatherOccupation && (
-                  <p className="text-sm text-red-500">{form.formState.errors.fatherOccupation.message}</p>
-                )}
-              </FormField>
-            </div>
-          </FormSection>
-          
-          <FormSection title="Mother's Information">
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Full Name" htmlFor="motherFullName" required>
-                <Input 
-                  id="motherFullName" 
-                  placeholder="Enter full name" 
-                  {...form.register("motherFullName")} 
-                  className="w-full"
-                />
-                {form.formState.errors.motherFullName && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherFullName.message}</p>
+                {form.formState.errors.permanentAddress && (
+                  <p className="text-sm text-red-500">{form.formState.errors.permanentAddress.message}</p>
                 )}
               </FormField>
               
-              <FormField label="National ID Number" htmlFor="motherNationalId" required>
-                <Input 
-                  id="motherNationalId" 
-                  placeholder="Enter national ID number" 
-                  {...form.register("motherNationalId")} 
+              <FormField label="Current Address (if different from permanent address)" htmlFor="currentAddress">
+                <Textarea 
+                  id="currentAddress" 
+                  placeholder="Enter current address" 
+                  {...form.register("currentAddress")} 
                   className="w-full"
                 />
-                {form.formState.errors.motherNationalId && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherNationalId.message}</p>
-                )}
               </FormField>
-            </div>
+            </FormSection>
             
-            <div className="grid md:grid-cols-2 gap-6">
-              <FormField label="Occupation" htmlFor="motherOccupation" required>
-                <Input 
-                  id="motherOccupation" 
-                  placeholder="Enter occupation" 
-                  {...form.register("motherOccupation")} 
-                  className="w-full"
+            <FormSection title="Declaration and Submit" className="bg-gradient-to-r from-[#0F2B5B]/5 to-transparent rounded-lg p-6">
+              <div className="flex items-start space-x-3 mb-6">
+                <Checkbox 
+                  id="declaration" 
+                  onCheckedChange={(checked) => {
+                    form.setValue("declaration", checked === true);
+                  }} 
+                  className="mt-1"
                 />
-                {form.formState.errors.motherOccupation && (
-                  <p className="text-sm text-red-500">{form.formState.errors.motherOccupation.message}</p>
-                )}
-              </FormField>
-            </div>
-          </FormSection>
-
-          <FormSection title="Address Details">
-            <FormField label="Permanent Address" htmlFor="permanentAddress" required>
-              <Textarea 
-                id="permanentAddress" 
-                placeholder="Enter permanent address" 
-                {...form.register("permanentAddress")} 
-                className="w-full"
-              />
-              {form.formState.errors.permanentAddress && (
-                <p className="text-sm text-red-500">{form.formState.errors.permanentAddress.message}</p>
+                <label htmlFor="declaration" className="text-sm text-gray-700">
+                  I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that providing false information is punishable by law.
+                </label>
+              </div>
+              {form.formState.errors.declaration && (
+                <p className="text-sm text-red-500 mb-4">{form.formState.errors.declaration.message}</p>
               )}
-            </FormField>
-            
-            <FormField label="Current Address (if different from permanent address)" htmlFor="currentAddress">
-              <Textarea 
-                id="currentAddress" 
-                placeholder="Enter current address" 
-                {...form.register("currentAddress")} 
-                className="w-full"
-              />
-            </FormField>
-          </FormSection>
-          
-          <FormSection title="Declaration and Submit" className="bg-gradient-to-r from-[#0F2B5B]/5 to-transparent">
-            <div className="flex items-start space-x-3 mb-6">
-              <Checkbox 
-                id="declaration" 
-                onCheckedChange={(checked) => {
-                  form.setValue("declaration", checked === true);
-                }} 
-                className="mt-1"
-              />
-              <label htmlFor="declaration" className="text-sm text-gray-700">
-                I hereby declare that the information provided above is true and correct to the best of my knowledge. I understand that providing false information is punishable by law.
-              </label>
-            </div>
-            {form.formState.errors.declaration && (
-              <p className="text-sm text-red-500 mb-4">{form.formState.errors.declaration.message}</p>
-            )}
-            
-            <div className="flex justify-center pt-4">
-              <Button 
-                type="submit" 
-                className="bg-[#0F2B5B] hover:bg-[#0a1e3e] px-12 py-6 transition-all duration-300 transform hover:scale-105" 
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Submitting..." : "Submit Registration"}
-              </Button>
-            </div>
-          </FormSection>
+              
+              <div className="flex justify-center pt-4">
+                <Button 
+                  type="submit" 
+                  className="bg-[#0F2B5B] hover:bg-[#0a1e3e] px-12 py-6 transition-all duration-300 transform hover:scale-105 rounded-lg shadow-md hover:shadow-xl" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Registration"}
+                </Button>
+              </div>
+            </FormSection>
+          </div>
         </form>
 
         <footer className="mt-10 text-center text-gray-500 text-sm">

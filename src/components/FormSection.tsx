@@ -10,9 +10,12 @@ interface FormSectionProps {
 
 const FormSection = ({ title, children, className }: FormSectionProps) => {
   return (
-    <div className={cn("mb-8", className)}>
-      <h2 className="text-xl font-semibold text-[#0F2B5B] mb-4 border-b border-[#E5E7EB] pb-2">{title}</h2>
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-[#E5E7EB]">
+    <div className={cn("relative", className)}>
+      <h2 className="text-xl font-semibold text-[#0F2B5B] mb-6 flex items-center gap-2">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#0F2B5B]"></span>
+        {title}
+      </h2>
+      <div className="pl-6 border-l border-[#E5E7EB]">
         {children}
       </div>
     </div>
