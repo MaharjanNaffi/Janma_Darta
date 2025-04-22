@@ -89,7 +89,7 @@ const Index = () => {
       <div className="container max-w-4xl mx-auto px-4 py-6">
         <Header />
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-12">
           <FormSection title="Child Information">
             <div className="grid md:grid-cols-2 gap-6">
               <FormField label="Full Name" htmlFor="childFullName" required>
@@ -305,7 +305,7 @@ const Index = () => {
             </FormField>
           </FormSection>
           
-          <FormSection title="Declaration and Submit" className="bg-white">
+          <FormSection title="Declaration and Submit" className="bg-gradient-to-r from-[#0F2B5B]/5 to-transparent">
             <div className="flex items-start space-x-3 mb-6">
               <Checkbox 
                 id="declaration" 
@@ -323,7 +323,11 @@ const Index = () => {
             )}
             
             <div className="flex justify-center pt-4">
-              <Button type="submit" className="bg-[#0F2B5B] hover:bg-[#0a1e3e] px-12 py-6" disabled={isSubmitting}>
+              <Button 
+                type="submit" 
+                className="bg-[#0F2B5B] hover:bg-[#0a1e3e] px-12 py-6 transition-all duration-300 transform hover:scale-105" 
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Submitting..." : "Submit Registration"}
               </Button>
             </div>
